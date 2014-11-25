@@ -159,5 +159,37 @@ hors rémunération des temps de pause, d’habillage et de déshabillage et de 
 hors rémunération brute afférente aux majorations pour heures d’équivalence versée en application d’une convention ou d’un accord collectif étendu en vigueur au 1er janvier 2010, dans la limite de 25%.</div>
 			</div>
 		</section> -->
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+		<script type="text/javascript">
+			function getData() {
+				var data = {
+					categorie: 'prive_cadre'
+				};
+
+				[ 'brut', 'taille' ].forEach(function(name) {
+					data[name] = $('input[name="' + name +'"]').val();
+				});
+
+				return data;
+			}
+
+			function updateValue() {
+				$.ajax('/api/fillon', {
+					data: getData(),
+					success: showValue
+				});
+			}
+
+			function showValue(val) {
+				var truncated = String(val);
+				truncated = truncated.slice(0, truncated.indexOf('.') + 3);
+
+				$('input[name="fillon"]').val(truncated.replace('.', ','));
+			}
+
+			$('input').change(updateValue);
+		</script>
 	</body>
 </html>
