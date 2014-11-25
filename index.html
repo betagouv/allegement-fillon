@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Calculateur de réduction Fillon — Fiche de Paie Simplifiée</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/main.css">
+
+		<style type="text/css">
+			label {
+				font-weight: bold;
+			}
+
+			div {
+				display: block;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Pour mon entreprise</h2>
+		<div>
+			de
+			<input name="taille" type="number" min="0" placeholder="1" value="1" step="1" max="9999"/>
+			<label for="taille"><abbr title="Équivalent Temps Plein">ETP</abbr> en moyenne</label>
+			<a class="help" href="https://wiki.openfisca.fr/index.php/Taille_d%27entreprise" title="Moyenne sur l'année, au prorata du temps plein.">?</a>,
+		</div>
+		<!--
+		si taille >= 50 :
+		<div>
+			dans laquelle j'ai négocié les salaires pour la dernière fois en
+			<input type="number" min="1970" max="2014" step="1" name="anneeNegociation" />
+		</div>
+
+		Condition :
+		- Avoir respecté l'[obligation de négocier les salaires](http://travail-emploi.gouv.fr/informations-pratiques,89/les-fiches-pratiques-du-droit-du,91/convention-collective,110/la-negociation-collective-dans-l,1008.html#sommaire_2)
+		- Cette obligation n'existe que ["dans les entreprises ou sont constituées une ou plusieurs sections syndicales d’organisations représentatives"](http://travail-emploi.gouv.fr/informations-pratiques,89/les-fiches-pratiques-du-droit-du,91/convention-collective,110/la-negociation-collective-dans-l,1008.html#sommaire_2).
+		- Une section syndicale ne peut exister qu'avec un [délégué syndical](http://vosdroits.service-public.fr/particuliers/F102.xhtml) ou un [représentant de section](http://vosdroits.service-public.fr/particuliers/F32078.xhtml), qui lui-même ne peut (et doit) exister que dans une entreprise d'au moins 50 salariés.
+		-->
+		<!--
+		si salarié := bâtiment et travaux publics, intermittents du spectacle, dockers
+		<div>
+			dont l'activité est
+		</div>
+
+		Condition :
+		- Majoration de 10% pour les entreprises [cotisant à une caisse de congés payés](http://www.urssaf.fr/employeurs/comite_dentreprise/vos_salaries_-_les_mesures_daide_a_lemploi/reduction_dite_fillon_04.html#OG67268).
+		- [La cotisation est obligatoire](http://travail-emploi.gouv.fr/informations-pratiques,89/fiches-pratiques,91/conges-et-absences-du-salarie,114/les-conges-payes,1035.html#sommaire_1).
+		- Les entreprises qui doivent cotiser à une caisse spécifique sont [bâtiment et travaux publics, intermittents du spectacle et dockers](http://travail-emploi.gouv.fr/informations-pratiques,89/fiches-pratiques,91/conges-et-absences-du-salarie,114/les-conges-payes,1035.html#sommaire_8).
+		-->
+		<h2>mon allègement de cotisations sur le salaire d'un salarié</h2>
+		<div>
+			payé
+			<input type="number" min="0" max="99999" value="1445.38" step="50" placeholder="1445,38" name="brut" />
+			<label for="brut">€&nbsp;bruts&nbsp;/&nbsp;mois</label>
+		</div>
+		<div>
+			pour
+			<input type="number" min="0" max="48" value="35" step="1" placeholder="35" name="heures" />
+			<label for="heures">heures&nbsp;/&nbsp;semaine</label> de travail,
+		</div>
+		<div>
+			plus
+			<input type="number" min="0" max="48" value="0" step="1" placeholder="0" name="heuresSup" />
+			<label for="heuresSup">heures supplémentaires</label>
+		</div>
+		<div>
+			et
+			<input type="number" min="0" max="99999" value="0" step="100" placeholder="0" name="primes" />
+			<label for="primes">€ de primes</label> ce mois-ci
+		</div>
+		<div>
+			et ayant pris
+			<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="congés" />
+			<label for="maladie">jours de congé</label>
+		</div>
+		<div>
+			et
+			<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="maladie" />
+			<label for="maladie">jours de maladie</label>
+		</div>
+
+		<h2>est de <input readonly name="fillon" /> €.</h2>
+
+<!--
+		<section id="additional">
+			<div id="heuresSup">Heures supplémentaires et complémentaires confondues.</div>
+			<div id="primes">La rémunération à prendre en compte pour le calcul du coefficient de la réduction est la rémunération brute versée au salarié au cours de l’année et soumise à cotisations de sécurité sociale.
+				<div>L’ensemble des éléments de rémunération, en espèces ou en nature, attribués en contrepartie ou à l’occasion du travail, quelle que soit sa dénomination : salaire, prime, majoration pour heures supplémentaires, gratification, indemnités, notamment de congés payés ou en cas de maladie, rémunération des heures supplémentaires et complémentaires (majorations incluses) ...
+hors rémunération des temps de pause, d’habillage et de déshabillage et de douche, à condition qu’elle soit versée en application d’une convention ou d’un accord collectif étendu en étendu en vigueur au 11 octobre 2007. Les temps de pause, d'habillage, de déshabillage et de douche ne doivent pas avoir la nature de temps de travail effectif ;
+hors rémunération brute afférente aux majorations pour heures d’équivalence versée en application d’une convention ou d’un accord collectif étendu en vigueur au 1er janvier 2010, dans la limite de 25%.</div>
+			</div>
+		</section> -->
+	</body>
+</html>
