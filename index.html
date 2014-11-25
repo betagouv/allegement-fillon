@@ -18,19 +18,54 @@
 				font-weight: bold;
 			}
 
-			div {
-				display: block;
-				text-align: center;
+			body {
+				display: table;
+				width: 50em;
+				margin: auto;
+			}
+
+			h2 {
+				column-span: all;
+			}
+
+			.entry {
+				display: table-row
+			}
+
+			input {
+				width: 5em;
+			}
+
+			.input, .label {
+				display: table-cell;
+				width: 40%;
+			}
+
+			.input, input {
+				text-align: right;
+			}
+
+			.input {
+				padding-right: .25em;
+			}
+
+			.label {
+				padding-left: .25em;
+				text-align: left;
 			}
 		</style>
 	</head>
 	<body>
 		<h2>Pour mon entreprise</h2>
-		<div>
-			de
-			<input name="taille" type="number" min="0" placeholder="1" value="1" step="1" max="9999"/>
-			<label for="taille"><abbr title="Équivalent Temps Plein">ETP</abbr> en moyenne</label>
-			<a class="help" href="https://wiki.openfisca.fr/index.php/Taille_d%27entreprise" title="Moyenne sur l'année, au prorata du temps plein.">?</a>,
+		<div class="entry">
+			<div class="input">
+				de
+				<input name="taille" type="number" min="0" placeholder="1" value="1" step="1" max="9999"/>
+			</div>
+			<div class="label">
+				<label for="taille">salariés <abbr title="Équivalent Temps Plein">ETP</abbr></label>
+				<a class="help" href="https://wiki.openfisca.fr/index.php/Taille_d%27entreprise" title="Moyenne sur l'année, au prorata du temps plein.">?</a>,
+			</div>
 		</div>
 		<!--
 		si taille >= 50 :
@@ -55,36 +90,62 @@
 		- [La cotisation est obligatoire](http://travail-emploi.gouv.fr/informations-pratiques,89/fiches-pratiques,91/conges-et-absences-du-salarie,114/les-conges-payes,1035.html#sommaire_1).
 		- Les entreprises qui doivent cotiser à une caisse spécifique sont [bâtiment et travaux publics, intermittents du spectacle et dockers](http://travail-emploi.gouv.fr/informations-pratiques,89/fiches-pratiques,91/conges-et-absences-du-salarie,114/les-conges-payes,1035.html#sommaire_8).
 		-->
-		<h2>mon allègement de cotisations sur le salaire d'un salarié</h2>
-		<div>
-			payé
-			<input type="number" min="0" max="99999" value="1445.38" step="50" placeholder="1445,38" name="brut" />
-			<label for="brut">€&nbsp;bruts&nbsp;/&nbsp;mois</label>
+
+		<h2>mon allègement de cotisations sur le salaire d'un employé</h2>
+
+		<div class="entry">
+			<div class="input">
+				payé ce mois
+				<input type="number" min="0" max="99999" value="1445.38" step="50" placeholder="1445,38" name="brut" />
+			</div>
+			<div class="label">
+				<label for="brut">€&nbsp;bruts</label>
+			</div>
 		</div>
-		<div>
-			pour
-			<input type="number" min="0" max="48" value="35" step="1" placeholder="35" name="heures" />
-			<label for="heures">heures&nbsp;/&nbsp;semaine</label> de travail,
+		<div class="entry">
+			<div class="input">
+				plus
+				<input type="number" min="0" max="99999" value="0" step="100" placeholder="0" name="primes" />
+			</div>
+			<div class="label">
+				<label for="primes">€ de primes</label>
+			</div>
 		</div>
-		<div>
-			plus
-			<input type="number" min="0" max="48" value="0" step="1" placeholder="0" name="heuresSup" />
-			<label for="heuresSup">heures supplémentaires</label>
+		<div class="entry">
+			<div class="input">
+				pour
+				<input type="number" min="0" max="48" value="35" step="1" placeholder="35" name="heures" />
+			</div>
+			<div class="label">
+				<label for="heures">heures&nbsp;/&nbsp;semaine</label> de travail
+			</div>
 		</div>
-		<div>
-			et
-			<input type="number" min="0" max="99999" value="0" step="100" placeholder="0" name="primes" />
-			<label for="primes">€ de primes</label> ce mois-ci
+		<div class="entry">
+			<div class="input">
+				plus
+				<input type="number" min="0" max="48" value="0" step="1" placeholder="0" name="heuresSup" />
+			</div>
+			<div class="label">
+				<label for="heuresSup">heures supplémentaires</label>
+			</div>
 		</div>
-		<div>
-			et ayant pris
-			<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="congés" />
-			<label for="maladie">jours de congé</label>
+		<div class="entry">
+			<div class="input">
+				et ayant pris
+				<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="congés" />
+			</div>
+			<div class="label">
+				<label for="maladie">jours de congé</label>
+			</div>
 		</div>
-		<div>
-			et
-			<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="maladie" />
-			<label for="maladie">jours de maladie</label>
+		<div class="entry">
+			<div class="input">
+				et
+				<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="maladie" />
+			</div>
+			<div class="label">
+				<label for="maladie">jours de maladie</label>
+			</div>
 		</div>
 
 		<h2>est de <input readonly name="fillon" /> €.</h2>
