@@ -114,10 +114,10 @@
 		<div class="entry">
 			<div class="input">
 				pour
-				<input type="number" min="0" max="48" value="35" step="1" placeholder="35" name="heures" />
+				<input type="number" min="0" max="48" value="35" step="1" placeholder="35" name="heuresParSemaine" />
 			</div>
 			<div class="label">
-				<label for="heures">heures&nbsp;/&nbsp;semaine</label> de travail
+				<label for="heuresParSemaine">heures&nbsp;/&nbsp;semaine</label> de travail
 			</div>
 		</div>
 		<div class="entry">
@@ -132,10 +132,10 @@
 		<div class="entry">
 			<div class="input">
 				et ayant pris
-				<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="congés" />
+				<input type="number" min="0" max="30" value="0" step="1" placeholder="0" name="conges" />
 			</div>
 			<div class="label">
-				<label for="maladie">jours de congé</label>
+				<label for="conges">jours de congé</label>
 			</div>
 		</div>
 		<div class="entry">
@@ -163,14 +163,26 @@ hors rémunération brute afférente aux majorations pour heures d’équivalenc
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 		<script type="text/javascript">
+			function getWorkedHoursPerWeek() {
+				var WORKED_DAYS_PER_WEEK = 5;
+
+				return Number($('input[name="heuresParSemaine"]').val()) / WORKED_DAYS_PER_WEEK;
+			}
+
 			function getData() {
 				var data = {
-					categorie: 'prive_cadre'
+					categorie				: 'prive_cadre',
+					jours					: 22
 				};
 
-				[ 'brut', 'taille' ].forEach(function(name) {
+				[ 'brut', 'taille', 'heuresSup' ].forEach(function(name) {
 					data[name] = $('input[name="' + name +'"]').val();
 				});
+
+				data.heuresNonTravaillees = getWorkedHoursPerWeek()
+					* (Number($('input[name="conges"]').val())
+						+ Number($('input[name="maladie"]').val())
+					  );
 
 				return data;
 			}
